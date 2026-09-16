@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chess Board</title>
+
+    <style>
+        body {
+            background: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .board {
+            width: 560px;
+            height: 560px;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            border: 5px solid white;
+        }
+
+        .box {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+        }
+
+        .white {
+            background: #f0d9b5;
+        }
+
+        .black {
+            background: #b58863;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="board">
+
+    <!-- Row 1 -->
+    <div class="box white">♜</div>
+    <div class="box black">♞</div>
+    <div class="box white">♝</div>
+    <div class="box black">♛</div>
+    <div class="box white">♚</div>
+    <div class="box black">♝</div>
+    <div class="box white">♞</div>
+    <div class="box black">♜</div>
+
+    <!-- Row 2 -->
+    <div class="box black">♟</div>
+    <div class="box white">♟</div>
+    <div class="box black">♟</div>
+    <div class="box white">♟</div>
+    <div class="box black">♟</div>
+    <div class="box white">♟</div>
+    <div class="box black">♟</div>
+    <div class="box white">♟</div>
+
+    <!-- Row 3 -->
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+
+    <!-- Row 4 -->
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+
+    <!-- Row 5 -->
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+
+    <!-- Row 6 -->
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+    <div class="box black"></div>
+    <div class="box white"></div>
+
+    <!-- Row 7 -->
+    <div class="box white">♙</div>
+    <div class="box black">♙</div>
+    <div class="box white">♙</div>
+    <div class="box black">♙</div>
+    <div class="box white">♙</div>
+    <div class="box black">♙</div>
+    <div class="box white">♙</div>
+    <div class="box black">♙</div>
+
+    <!-- Row 8 -->
+    <div class="box black">♖</div>
+    <div class="box white">♘</div>
+    <div class="box black">♗</div>
+    <div class="box white">♕</div>
+    <div class="box black">♔</div>
+    <div class="box white">♗</div>
+    <div class="box black">♘</div>
+    <div class="box white">♖</div>
+
+</div>
+
+</body>
+</html>
