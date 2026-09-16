@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Deep Focus playlist" />
+  <title>Deep Focus | Playlist</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-label="Music home">●</div>
+      <nav class="top-links" aria-label="Account navigation"><a href="#signup">Sign up</a><a class="login-button" href="#login">Log in</a></nav>
+    </header>
+    <main class="playlist-page">
+      <section class="playlist-hero">
+        <img class="cover-art" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=700&q=85" alt="Star-filled night sky" />
+        <div class="hero-copy"><p class="type-label">Playlist</p><h1>Deep Focus</h1><p class="description">Keep calm and focus with ambient and post-rock music.</p><div class="playlist-meta"><span class="spotify-dot">●</span><strong>Spotify</strong><span>•</span><strong>3,940,865 likes</strong><span>•</span><strong>252 songs</strong><span>about 10 hr</span></div></div>
+      </section>
+      <section class="playlist-content">
+        <div class="action-row"><button class="play-button" id="play-button" aria-label="Play playlist">▶</button><button class="icon-button like-button" id="like-button" aria-label="Like playlist">♡</button><button class="icon-button more-button" aria-label="More options">•••</button></div>
+        <div class="track-header"><span>#</span><span>Title</span><span>Album</span><span>Date added</span><span>◷</span></div>
+        <ol class="track-list" id="track-list">
+          <li class="track" data-title="So Far So Good"><span class="track-number">1</span><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=120&q=80" alt="" /><span class="track-title"><strong>So Far So Good</strong><small>Sun Of They</small></span><span class="album">Silent Hills</span><span class="added">1 week ago</span><span class="duration">2:31</span></li>
+          <li class="track" data-title="Apricity"><span class="track-number">2</span><img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=120&q=80" alt="" /><span class="track-title"><strong>Apricity</strong><small>Imala Zir</small></span><span class="album">Apricity</span><span class="added">1 week ago</span><span class="duration">2:38</span></li>
+          <li class="track" data-title="Solatium"><span class="track-number">3</span><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=120&q=80&sat=-20" alt="" /><span class="track-title"><strong>Solatium</strong><small>Imber Sun</small></span><span class="album">Solatium</span><span class="added">1 week ago</span><span class="duration">2:06</span></li>
+          <li class="track" data-title="efflorescence"><span class="track-number">4</span><img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=120&q=80" alt="" /><span class="track-title"><strong>efflorescence</strong><small>Far &amp; Beyond</small></span><span class="album">efflorescence</span><span class="added">1 week ago</span><span class="duration">2:23</span></li>
+          <li class="track" data-title="Gather My Thoughts"><span class="track-number">5</span><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=120&q=80" alt="" /><span class="track-title"><strong>Gather My Thoughts</strong><small>Josef Briem</small></span><span class="album">Gather My Thoughts</span><span class="added">1 week ago</span><span class="duration">3:03</span></li>
+          <li class="track" data-title="Fresh Paint"><span class="track-number">6</span><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=120&q=80" alt="" /><span class="track-title"><strong>Fresh Paint</strong><small>Midnight Faces</small></span><span class="album">New Spaces</span><span class="added">1 week ago</span><span class="duration">2:24</span></li>
+        </ol>
+      </section>
+    </main>
+  </div>
+  <script>
+    const playButton = document.querySelector('#play-button');
+    const likeButton = document.querySelector('#like-button');
+    const trackList = document.querySelector('#track-list');
+    playButton.addEventListener('click', () => {
+      const isPlaying = playButton.classList.toggle('playing');
+      playButton.textContent = isPlaying ? 'Ⅱ' : '▶';
+      playButton.setAttribute('aria-label', isPlaying ? 'Pause playlist' : 'Play playlist');
+    });
+    likeButton.addEventListener('click', () => {
+      likeButton.classList.toggle('liked');
+      likeButton.textContent = likeButton.classList.contains('liked') ? '♥' : '♡';
+    });
+    trackList.addEventListener('click', (event) => {
+      const track = event.target.closest('.track');
+      if (!track) return;
+      document.querySelectorAll('.track.active').forEach((item) => item.classList.remove('active'));
+      track.classList.add('active');
+      playButton.classList.add('playing');
+      playButton.textContent = 'Ⅱ';
+    });
+  </script>
+</body>
+</html>
