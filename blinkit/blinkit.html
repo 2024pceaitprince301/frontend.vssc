@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blinkit - Grocery Delivery</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#fff;
+    color:#222;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    height:100px;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid #eee;
+    position:sticky;
+    top:0;
+    background:#fff;
+    z-index:1000;
+}
+
+.logo{
+    width:208px;
+    height:100%;
+    display:flex;
+    align-items:center;
+    padding-left:35px;
+    border-right:1px solid #eee;
+}
+
+.logo h1{
+    color:#f8c52d;
+    font-size:46px;
+    font-weight:800;
+    letter-spacing:-3px;
+}
+
+.delivery{
+    width:330px;
+    padding-left:52px;
+    cursor:pointer;
+}
+
+.delivery h3{
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+.delivery p{
+    font-size:14px;
+    color:#555;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    width:260px;
+}
+
+.searchBox{
+    height:58px;
+    flex:1;
+    background:#f7f7f7;
+    border:1px solid #e7e7e7;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    padding:0 18px;
+}
+
+.searchIcon{
+    font-size:28px;
+    margin-right:12px;
+}
+
+.searchBox input{
+    border:none;
+    outline:none;
+    background:transparent;
+    width:100%;
+    font-size:17px;
+}
+
+.login{
+    margin:0 35px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.cartBtn{
+    height:62px;
+    min-width:130px;
+    margin-right:25px;
+    border:none;
+    border-radius:12px;
+    background:#e8e8e8;
+    color:#555;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.cartBtn.active{
+    background:#0c831f;
+    color:#fff;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    width:82%;
+    margin:20px auto;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    height:280px;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+
+    background-image:
+    linear-gradient(
+        90deg,
+        rgba(35,122,52,1) 0%,
+        rgba(42,137,62,.96) 38%,
+        rgba(42,137,62,.2) 75%,
+        rgba(42,137,62,0) 100%
+    ),
+    url("https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1800&q=85");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.heroText{
+    position:absolute;
+    left:42px;
+    top:30px;
+    color:white;
+    width:60%;
+}
+
+.heroText h1{
+    font-size:42px;
+    line-height:1.1;
+    margin-bottom:15px;
+}
+
+.heroText p{
+    font-size:27px;
+    line-height:1.35;
+    margin-bottom:25px;
+}
+
+.shopBtn{
+    background:#fff;
+    color:#333;
+    border:none;
+    padding:12px 18px;
+    border-radius:7px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* ================= PROMO CARDS ================= */
+
+.promos{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-top:36px;
+}
+
+.promo{
+    height:228px;
+    border-radius:18px;
+    padding:27px 20px;
+    overflow:hidden;
+    position:relative;
+    background-size:cover;
+    background-position:center;
+}
+
+.promo1{
+    background:
+    linear-gradient(90deg,#11bbb7 0%,#11bbb7 47%,transparent 100%),
+    url("https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=80");
+}
+
+.promo2{
+    background:
+    linear-gradient(90deg,#ffc928 0%,#ffc928 48%,transparent 100%),
+    url("https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=80");
+}
+
+.promo3{
+    background:
+    linear-gradient(90deg,#dce9f5 0%,#dce9f5 45%,transparent 100%),
+    url("https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=80");
+}
+
+.promo h2{
+    font-size:27px;
+    width:67%;
+    line-height:1.15;
+    margin-bottom:12px;
+}
+
+.promo p{
+    font-size:16px;
+    width:65%;
+    line-height:1.35;
+    margin-bottom:20px;
+}
+
+.orderBtn{
+    border:none;
+    padding:10px 17px;
+    background:#222;
+    color:#fff;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+/* ================= CATEGORIES ================= */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+    gap:18px;
+    margin-top:37px;
+}
+
+.category{
+    cursor:pointer;
+    text-align:center;
+}
+
+.categoryImg{
+    height:120px;
+    border-radius:14px;
+    background:#f1f7ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.categoryImg img{
+    width:90%;
+    height:90%;
+    object-fit:contain;
+}
+
+.category p{
+    margin-top:10px;
+    font-size:15px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.productsSection{
+    margin-top:45px;
+}
+
+.productsSection h2{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+}
+
+.product{
+    border:1px solid #eee;
+    border-radius:12px;
+    padding:12px;
+    background:#fff;
+    transition:.2s;
+}
+
+.product:hover{
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
+    transform:translateY(-2px);
+}
+
+.productImg{
+    height:160px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fafafa;
+    border-radius:10px;
+}
+
+.productImg img{
+    max-width:100%;
+    max-height:150px;
+    object-fit:contain;
+}
+
+.product h3{
+    font-size:15px;
+    margin-top:12px;
+    min-height:38px;
+}
+
+.weight{
+    color:#777;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.productBottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:13px;
+}
+
+.price{
+    font-weight:bold;
+}
+
+.addBtn{
+    border:1px solid #0c831f;
+    background:#fff;
+    color:#0c831f;
+    padding:7px 18px;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.addBtn:hover{
+    background:#0c831f;
+    color:#fff;
+}
+
+/* ================= CART SIDEBAR ================= */
+
+.cartOverlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:2000;
+}
+
+.cartOverlay.show{
+    display:block;
+}
+
+.cartPanel{
+    position:absolute;
+    right:0;
+    top:0;
+    height:100%;
+    width:430px;
+    background:white;
+    display:flex;
+    flex-direction:column;
+    animation:slide .25s ease;
+}
+
+@keyframes slide{
+    from{transform:translateX(100%)}
+    to{transform:translateX(0)}
+}
+
+.cartHeader{
+    height:75px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+    border-bottom:1px solid #eee;
+}
+
+.cartHeader h2{
+    font-size:22px;
+}
+
+.close{
+    font-size:28px;
+    border:none;
+    background:none;
+    cursor:pointer;
+}
+
+.cartItems{
+    flex:1;
+    overflow-y:auto;
+    padding:20px;
+}
+
+.emptyCart{
+    text-align:center;
+    color:#777;
+    margin-top:100px;
+}
+
+.emptyCart div{
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+.cartItem{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cartItem img{
+    width:65px;
+    height:65px;
+    object-fit:contain;
+    background:#f7f7f7;
+    border-radius:8px;
+}
+
+.itemInfo{
+    flex:1;
+}
+
+.itemInfo h4{
+    font-size:14px;
+}
+
+.itemInfo p{
+    color:#777;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    border:1px solid #0c831f;
+    border-radius:6px;
+    overflow:hidden;
+}
+
+.qty button{
+    border:none;
+    background:#0c831f;
+    color:#fff;
+    width:25px;
+    height:28px;
+    cursor:pointer;
+}
+
+.qty span{
+    width:27px;
+    text-align:center;
+    font-size:13px;
+}
+
+.cartFooter{
+    border-top:1px solid #ddd;
+    padding:18px 20px;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.checkout{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:9px;
+    background:#0c831f;
+    color:#fff;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* ================= MODAL ================= */
+
+.modalOverlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:3000;
+    align-items:center;
+    justify-content:center;
+}
+
+.modalOverlay.show{
+    display:flex;
+}
+
+.modal{
+    width:400px;
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    position:relative;
+}
+
+.modal h2{
+    margin-bottom:20px;
+}
+
+.modal input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    margin-bottom:12px;
+    outline:none;
+}
+
+.modal button{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    background:#0c831f;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.modalClose{
+    position:absolute;
+    right:18px;
+    top:15px;
+    border:none;
+    background:none;
+    font-size:24px;
+    cursor:pointer;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%) translateY(80px);
+    background:#222;
+    color:white;
+    padding:13px 22px;
+    border-radius:8px;
+    opacity:0;
+    transition:.3s;
+    z-index:5000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1200px){
+
+    .container{
+        width:92%;
+    }
+
+    .categories{
+        grid-template-columns:repeat(5,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:850px){
+
+    .navbar{
+        height:auto;
+        padding:12px;
+        flex-wrap:wrap;
+    }
+
+    .logo{
+        width:auto;
+        border:none;
+        padding:0;
+    }
+
+    .logo h1{
+        font-size:36px;
+    }
+
+    .delivery{
+        width:auto;
+        padding-left:15px;
+    }
+
+    .searchBox{
+        order:5;
+        flex-basis:100%;
+    }
+
+    .login{
+        margin-left:auto;
+        margin-right:15px;
+    }
+
+    .promos{
+        grid-template-columns:1fr;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .heroText{
+        width:90%;
+    }
+
+    .heroText h1{
+        font-size:30px;
+    }
+
+    .heroText p{
+        font-size:19px;
+    }
+}
+
+@media(max-width:550px){
+
+    .delivery{
+        display:none;
+    }
+
+    .cartBtn{
+        min-width:100px;
+        margin-right:0;
+    }
+
+    .categories{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .cartPanel{
+        width:100%;
+    }
+
+    .modal{
+        width:90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <h1>blinkit</h1>
+    </div>
+
+    <div class="delivery" onclick="openLocation()">
+        <h3>Delivery in 8 minutes</h3>
+        <p id="locationText">
+            Pratap Nagar, Jaipur, Rajasthan ▼
+        </p>
+    </div>
+
+    <div class="searchBox">
+
+        <span class="searchIcon">⌕</span>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder='Search "eggs"'
+            onkeyup="searchProducts()"
+        >
+
+    </div>
+
+    <div class="login" onclick="openLogin()">
+        Login
+    </div>
+
+    <button class="cartBtn" id="cartButton" onclick="openCart()">
+        🛒 My Cart
+    </button>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="heroText">
+
+            <h1>
+                Stock up on daily essentials
+            </h1>
+
+            <p>
+                Get farm-fresh goodness & a range of
+                exotic fruits, vegetables, eggs & more
+            </p>
+
+            <button class="shopBtn" onclick="scrollToProducts()">
+                Shop Now
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROMOTIONAL CARDS -->
+
+    <section class="promos">
+
+        <div class="promo promo1">
+
+            <h2>
+                Pharmacy at<br>
+                your doorstep!
+            </h2>
+
+            <p>
+                Cough syrups, pain
+                relief sprays & more
+            </p>
+
+            <button class="orderBtn" onclick="showToast('Pharmacy section opened')">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <div class="promo promo2">
+
+            <h2>
+                Pet care supplies
+                at your door
+            </h2>
+
+            <p>
+                Food, treats, toys & more
+            </p>
+
+            <button class="orderBtn" onclick="showToast('Pet Care section opened')">
+                Order Now
+            </button>
+
+        </div>
+
+
+        <div class="promo promo3">
+
+            <h2>
+                No time for
+                a diaper run?
+            </h2>
+
+            <p>
+                Get baby care essentials
+            </p>
+
+            <button class="orderBtn" onclick="showToast('Baby Care section opened')">
+                Order Now
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="categories">
+
+        <div class="category" onclick="filterCategory('Paan')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Paan</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Dairy')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Dairy, Bread</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Fruits')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Fruits & Vegetables</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Drinks')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1629203851122-3726ecdf080e?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Cold Drinks</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Snacks')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1621939514649-280e2aa55345?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Snacks</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Breakfast')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1521401292936-0a2129a30b1c?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Breakfast</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Sweet')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1575377427642-087cf684f29d?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Sweet</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Bakery')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Bakery</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Tea')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1517244683847-7456b63c5969?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Tea & Coffee</p>
+        </div>
+
+
+        <div class="category" onclick="filterCategory('Atta')">
+            <div class="categoryImg">
+                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=300&q=80">
+            </div>
+            <p>Atta, Rice</p>
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+
+    <section class="productsSection" id="productsSection">
+
+        <h2>Popular Products</h2>
+
+        <div class="products" id="products"></div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= CART ================= -->
+
+<div class="cartOverlay" id="cartOverlay" onclick="closeCart(event)">
+
+    <div class="cartPanel" onclick="event.stopPropagation()">
+
+        <div class="cartHeader">
+
+            <h2>My Cart</h2>
+
+            <button class="close" onclick="closeCart()">
+                ×
+            </button>
+
+        </div>
+
+        <div class="cartItems" id="cartItems">
+        </div>
+
+        <div class="cartFooter">
+
+            <div class="total">
+                <span>Total</span>
+                <span id="totalPrice">₹0</span>
+            </div>
+
+            <button class="checkout" onclick="checkout()">
+                Proceed to Checkout
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div class="modalOverlay" id="loginModal">
+
+    <div class="modal">
+
+        <button class="modalClose" onclick="closeLogin()">
+            ×
+        </button>
+
+        <h2>Login</h2>
+
+        <input
+            type="text"
+            placeholder="Enter mobile number"
+            maxlength="10"
+        >
+
+        <button onclick="loginUser()">
+            Continue
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= LOCATION MODAL ================= -->
+
+<div class="modalOverlay" id="locationModal">
+
+    <div class="modal">
+
+        <button class="modalClose" onclick="closeLocation()">
+            ×
+        </button>
+
+        <h2>Select Location</h2>
+
+        <input
+            id="newLocation"
+            type="text"
+            placeholder="Enter your location"
+        >
+
+        <button onclick="changeLocation()">
+            Confirm Location
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* ================= PRODUCTS DATA ================= */
+
+const productsData = [
+
+    {
+        id:1,
+        name:"Fresh Farm Eggs",
+        weight:"6 pieces",
+        price:65,
+        category:"Dairy",
+        image:"https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:2,
+        name:"Amul Taaza Milk",
+        weight:"1 L",
+        price:64,
+        category:"Dairy",
+        image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:3,
+        name:"Fresh Bananas",
+        weight:"6 pieces",
+        price:45,
+        category:"Fruits",
+        image:"https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:4,
+        name:"Red Apples",
+        weight:"4 pieces",
+        price:120,
+        category:"Fruits",
+        image:"https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:5,
+        name:"Potato Chips",
+        weight:"100 g",
+        price:35,
+        category:"Snacks",
+        image:"https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:6,
+        name:"Chocolate Bar",
+        weight:"50 g",
+        price:40,
+        category:"Sweet",
+        image:"https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:7,
+        name:"Cold Drink",
+        weight:"750 ml",
+        price:45,
+        category:"Drinks",
+        image:"https://images.unsplash.com/photo-1629203849820-fdd70d49c38e?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:8,
+        name:"Corn Flakes",
+        weight:"500 g",
+        price:180,
+        category:"Breakfast",
+        image:"https://images.unsplash.com/photo-1517093157656-b9eccef91cb1?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:9,
+        name:"Brown Bread",
+        weight:"400 g",
+        price:45,
+        category:"Bakery",
+        image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80"
+    },
+
+    {
+        id:10,
+        name:"Premium Tea",
+        weight:"250 g",
+        price:140,
+        category:"Tea",
+        image:"https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?auto=format&fit=crop&w=400&q=80"
+    }
+
+];
+
+
+/* ================= CART ================= */
+
+let cart = [];
+
+
+/* ================= DISPLAY PRODUCTS ================= */
+
+function displayProducts(list = productsData){
+
+    const container = document.getElementById("products");
+
+    container.innerHTML = "";
+
+    if(list.length === 0){
+
+        container.innerHTML =
+        "<h3>No products found</h3>";
+
+        return;
+    }
+
+    list.forEach(product => {
+
+        const item = document.createElement("div");
+
+        item.className = "product";
+
+        item.innerHTML = `
+
+            <div class="productImg">
+
+                <img src="${product.image}">
+
+            </div>
+
+            <h3>${product.name}</h3>
+
+            <p class="weight">${product.weight}</p>
+
+            <div class="productBottom">
+
+                <span class="price">
+                    ₹${product.price}
+                </span>
+
+                <button
+                    class="addBtn"
+                    onclick="addToCart(${product.id})"
+                >
+                    ADD
+                </button>
+
+            </div>
+
+        `;
+
+        container.appendChild(item);
+
+    });
+}
+
+
+/* ================= ADD TO CART ================= */
+
+function addToCart(id){
+
+    const product =
+    productsData.find(p => p.id === id);
+
+    const existing =
+    cart.find(item => item.id === id);
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+            ...product,
+            quantity:1
+        });
+
+    }
+
+    updateCart();
+
+    showToast(product.name + " added to cart");
+
+}
+
+
+/* ================= UPDATE CART ================= */
+
+function updateCart(){
+
+    const cartItems =
+    document.getElementById("cartItems");
+
+    const totalPrice =
+    document.getElementById("totalPrice");
+
+    const cartButton =
+    document.getElementById("cartButton");
+
+
+    if(cart.length === 0){
+
+        cartItems.innerHTML = `
+
+            <div class="emptyCart">
+
+                <div>🛒</div>
+
+                <h3>Your cart is empty</h3>
+
+                <p>Add items to get started</p>
+
+            </div>
+
+        `;
+
+        totalPrice.innerText = "₹0";
+
+        cartButton.innerText = "🛒 My Cart";
+
+        cartButton.classList.remove("active");
+
+        return;
+    }
+
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+    let count = 0;
+
+
+    cart.forEach(item => {
+
+        total += item.price * item.quantity;
+
+        count += item.quantity;
+
+
+        const div =
+        document.createElement("div");
+
+        div.className = "cartItem";
+
+        div.innerHTML = `
+
+            <img src="${item.image}">
+
+            <div class="itemInfo">
+
+                <h4>${item.name}</h4>
+
+                <p>${item.weight}</p>
+
+                <p>₹${item.price}</p>
+
+            </div>
+
+            <div class="qty">
+
+                <button
+                    onclick="changeQuantity(${item.id},-1)"
+                >
+                    −
+                </button>
+
+                <span>
+                    ${item.quantity}
+                </span>
+
+                <button
+                    onclick="changeQuantity(${item.id},1)"
+                >
+                    +
+                </button>
+
+            </div>
+
+        `;
+
+        cartItems.appendChild(div);
+
+    });
+
+
+    totalPrice.innerText =
+    "₹" + total;
+
+    cartButton.innerText =
+    "🛒 " + count + " items";
+
+    cartButton.classList.add("active");
+
+}
+
+
+/* ================= QUANTITY ================= */
+
+function changeQuantity(id, change){
+
+    const item =
+    cart.find(product => product.id === id);
+
+    if(!item) return;
+
+    item.quantity += change;
+
+    if(item.quantity <= 0){
+
+        cart =
+        cart.filter(product => product.id !== id);
+
+    }
+
+    updateCart();
+
+}
+
+
+/* ================= OPEN CART ================= */
+
+function openCart(){
+
+    document
+    .getElementById("cartOverlay")
+    .classList.add("show");
+
+    updateCart();
+
+}
+
+
+/* ================= CLOSE CART ================= */
+
+function closeCart(event){
+
+    if(
+        event &&
+        event.target.id !== "cartOverlay"
+    ) return;
+
+    document
+    .getElementById("cartOverlay")
+    .classList.remove("show");
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProducts(){
+
+    const search =
+    document
+    .getElementById("searchInput")
+    .value
+    .toLowerCase()
+    .trim();
+
+
+    const filtered =
+    productsData.filter(product =>
+
+        product.name
+        .toLowerCase()
+        .includes(search)
+
+        ||
+
+        product.category
+        .toLowerCase()
+        .includes(search)
+
+    );
+
+
+    displayProducts(filtered);
+
+}
+
+
+/* ================= CATEGORY FILTER ================= */
+
+function filterCategory(category){
+
+    const filtered =
+    productsData.filter(product =>
+
+        product.category
+        .toLowerCase()
+        .includes(category.toLowerCase())
+
+    );
+
+    displayProducts(filtered);
+
+    scrollToProducts();
+
+}
+
+
+/* ================= SHOP NOW ================= */
+
+function scrollToProducts(){
+
+    document
+    .getElementById("productsSection")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function openLogin(){
+
+    document
+    .getElementById("loginModal")
+    .classList.add("show");
+
+}
+
+
+function closeLogin(){
+
+    document
+    .getElementById("loginModal")
+    .classList.remove("show");
+
+}
+
+
+function loginUser(){
+
+    closeLogin();
+
+    showToast("Login successful!");
+
+}
+
+
+/* ================= LOCATION ================= */
+
+function openLocation(){
+
+    document
+    .getElementById("locationModal")
+    .classList.add("show");
+
+}
+
+
+function closeLocation(){
+
+    document
+    .getElementById("locationModal")
+    .classList.remove("show");
+
+}
+
+
+function changeLocation(){
+
+    const location =
+    document
+    .getElementById("newLocation")
+    .value
+    .trim();
+
+    if(location === ""){
+
+        showToast("Please enter a location");
+
+        return;
+    }
+
+
+    document
+    .getElementById("locationText")
+    .innerText =
+    location + " ▼";
+
+    closeLocation();
+
+    showToast("Location updated");
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+function checkout(){
+
+    if(cart.length === 0){
+
+        showToast("Your cart is empty");
+
+        return;
+    }
+
+    showToast(
+        "Checkout page coming soon!"
+    );
+
+}
+
+
+/* ================= TOAST ================= */
+
+function showToast(message){
+
+    const toast =
+    document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },2000);
+
+}
+
+
+/* ================= INITIAL LOAD ================= */
+
+displayProducts();
+
+updateCart();
+
+</script>
+
+</body>
+</html>
