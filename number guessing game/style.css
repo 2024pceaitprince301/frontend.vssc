@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+
+    background: linear-gradient(
+        #91d2ff,
+        #9db8f5,
+        #756fd2
+    );
+}
+
+/* Clouds */
+.cloud {
+    position: absolute;
+    background: rgba(255,255,255,0.7);
+    border-radius: 100px;
+    filter: blur(3px);
+}
+
+.cloud1 {
+    width: 350px;
+    height: 80px;
+    top: 15%;
+    left: -100px;
+}
+
+.cloud2 {
+    width: 400px;
+    height: 90px;
+    top: 25%;
+    right: -100px;
+}
+
+.cloud3 {
+    width: 350px;
+    height: 80px;
+    bottom: 15%;
+    left: -80px;
+}
+
+.game-box {
+    width: 480px;
+    padding: 35px 40px;
+    text-align: center;
+
+    background: rgba(255,255,255,0.85);
+    border-radius: 12px;
+
+    box-shadow: 0 15px 35px rgba(40,40,100,0.3);
+}
+
+h1 {
+    font-size: 21px;
+    color: #55505e;
+    margin-bottom: 22px;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+}
+
+input {
+    width: 75px;
+    height: 42px;
+    text-align: center;
+    font-size: 16px;
+
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #b14bc8;
+}
+
+button {
+    flex: 1;
+    height: 42px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: linear-gradient(
+        90deg,
+        #a53fc2,
+        #b94ed0
+    );
+
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+#message {
+    margin-top: 13px;
+    font-size: 13px;
+    color: #666;
+}
+
+.success {
+    color: green !important;
+}
+
+.wrong {
+    color: red !important;
+}
+
+.hint {
+    color: #7950a5 !important;
+}
